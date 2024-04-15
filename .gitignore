@@ -1,0 +1,10 @@
+.idea/
+__pycache__/
+data/
+venv/
+keys/
+config.py
+*.xlsx
+*.csv
+infra/.terraform
+*.prof
