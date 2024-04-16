@@ -8,3 +8,6 @@ config.py
 *.csv
 infra/.terraform
 *.prof
+infra/terraform.*
+infra/.terraform.lock.hcl
+*.pyc

@@ -1,0 +1,19 @@
+---
+version: '3.8'
+
+services:
+  db:
+    container_name: irembopg
+    image: postgres:16-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: irembo_admin
+      POSTGRES_PASSWORD: Irembo1234!
+      POSTGRES_DB: rembo
+    volumes:
+      - irmpgdata:/var/lib/postgresql/data
+    ports:
+      - "5438:5432"
+
+volumes:
+  irmpgdata:
