@@ -15,5 +15,19 @@ services:
     ports:
       - "5438:5432"
 
+  olap:
+    container_name: irembo_ch
+    image: clickhouse/clickhouse-server
+    user: "101:101"
+    hostname: clickhouse
+    volumes:
+      - ${PWD}/fs/volumes/clickhouse/etc/clickhouse-server/config.d/config.xml:/etc/clickhouse-server/config.d/config.xml
+      - ${PWD}/fs/volumes/clickhouse/etc/clickhouse-server/users.d/users.xml:/etc/clickhouse-server/users.d/users.xml
+      - ${PWD}/fs/volumes/clickhouse/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+    ports:
+      - "8123:8123"
+      - "9000:9000"
+
 volumes:
   irmpgdata:
+
