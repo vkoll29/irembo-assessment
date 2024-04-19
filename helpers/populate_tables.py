@@ -7,28 +7,28 @@ from config import db_creds
 fake = Faker()
 
 
-def establish_conn():
+def _establish_conn():
     user, pw = db_creds["user"], db_creds["password"]
     conn = psycopg2.connect(database="rembo", user=user, password=pw, host="localhost", port="5438")
     return conn
 
 
 def _get_employee_ids():
-    conn = establish_conn()
+    conn = _establish_conn()
     cursor = conn.cursor()
     cursor.execute("SELECT Employee_ID FROM Employee;")
     return [row[0] for row in cursor.fetchall()]
 
 
 def _get_sales_territory_ids():
-    conn = establish_conn()
+    conn = _establish_conn()
     cursor = conn.cursor()
     cursor.execute("SELECT Sales_Territory_ID FROM Sales_Territory;")
     return [row[0] for row in cursor.fetchall()]
 
 
 def _get_customer_keys():
-    conn = establish_conn()
+    conn = _establish_conn()
     cursor = conn.cursor()
     cursor.execute("SELECT Customer_Key FROM Customer;")
     return [row[0] for row in cursor.fetchall()]
@@ -36,7 +36,7 @@ def _get_customer_keys():
 
 # Populate Customers table
 def populate_customers():
-    conn = establish_conn()
+    conn = _establish_conn()
     cursor = conn.cursor()
     for _ in range(50000):
         last_name = fake.last_name()[:49]
@@ -99,7 +99,7 @@ def populate_customers():
 
 
 def populate_territory():
-    conn = establish_conn()
+    conn = _establish_conn()
     cursor = conn.cursor()
 
     insert_query = """
@@ -127,7 +127,7 @@ def populate_territory():
 
 
 def populate_employees():
-    conn = establish_conn()
+    conn = _establish_conn()
     cursor = conn.cursor()
     fake = Faker()
     try:
@@ -163,7 +163,7 @@ def populate_employees():
 
 
 def populate_sales(num_records):
-    conn = establish_conn()
+    conn = _establish_conn()
     cursor = conn.cursor()
     employee_ids = _get_employee_ids()
     sales_territory = _get_sales_territory_ids()
@@ -226,6 +226,3 @@ def populate_sales(num_records):
     finally:
         cursor.close()
         conn.close()
-
-
-populate_sales(500000)
