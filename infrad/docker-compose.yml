@@ -28,6 +28,32 @@ services:
       - "8123:8123"
       - "9000:9000"
 
+  jobmanager:
+    container_name: irembo_flink_jm
+    image: flink:latest
+    expose:
+      - "6123"
+    ports:
+      - "8081:8081"
+    command: jobmanager
+    environment:
+      - JOB_MANAGER_RPC_ADDRESS=jobmanager
+
+  taskmanager:
+    container_name: irembo_flink_tm
+    image: flink:latest
+    expose:
+      - "6121"
+      - "6122"
+    depends_on:
+      - jobmanager
+    command:
+      - taskmanager
+    links:
+      - "jobmanager:jobmanager"
+    environment:
+      - JOB_MANAGER_RPC_ADDRESS=jobmanager
+
 volumes:
   irmpgdata:
 
