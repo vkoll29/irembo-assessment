@@ -90,3 +90,11 @@ FOREIGN KEY (Employee_Id) REFERENCES Employee (Employee_Id)
 );
 
 /* END */
+
+
+/* My addiotional configuraitons */
+ALTER TABLE Employee
+    ADD FOREIGN KEY (Employee_Territory_Region) REFERENCES Sales_Territory (Sales_Territory_Region);
+
+ALTER TABLE Sales
+    ADD FOREIGN KEY (CustomerKey) REFERENCES Customer (Customer_Key);
