@@ -86,15 +86,21 @@ Unit_Price varchar(50) NULL,
 Unit_Price_Discount_Pct varchar(50) NULL,
 Employee_Id INT NOT NULL,
 PRIMARY KEY (Sales_Id),
-FOREIGN KEY (Employee_Id) REFERENCES Employee (Employee_Id)
+FOREIGN KEY (Employee_Id) REFERENCES Employee (Employee_Id),
+FOREIGN KEY (CustomerKey) REFERENCES Customer (Customer_Key) -- my additions
 );
 
 /* END */
 
 
 /* My addiotional configuraitons */
+ALTER TABLE Sales_Territory
+ADD CONSTRAINT unique_sales_territory_region UNIQUE (Sales_Territory_Region);
+
 ALTER TABLE Employee
     ADD FOREIGN KEY (Employee_Territory_Region) REFERENCES Sales_Territory (Sales_Territory_Region);
 
+ALTER TABLE Customer
+    ADD CONSTRAINT unique_customer_key UNIQUE (Customer_Key);
 ALTER TABLE Sales
     ADD FOREIGN KEY (CustomerKey) REFERENCES Customer (Customer_Key);
