@@ -17,8 +17,12 @@ solution. Please let me know if you need any clarification or have additional fe
 
 ### FLink jobmanager container additional configs
 * Download postgres-cdc connector: wget https://repo1.maven.org/maven2/com/ververica/flink-sql-connector-postgres-cdc/3.0.1/flink-sql-connector-postgres-cdc-3.0.1.jar
-* DOwnload jdbc connector
-* Download jdbc driver bundle: https://repo.maven.apache.org/maven2/org/apache/flink/flink-sql-jdbc-driver-bundle/1.19.0/flink-sql-jdbc-driver-bundle-1.19.0.jar
+* DOwnload jdbc connector: wget https://repo1.maven.org/maven2/org/apache/flink/flink-connector-jdbc/3.1.2-1.18/flink-connector-jdbc-3.1.2-1.18.jar
+* Get postgresjdbc wget https://repo1.maven.org/maven2/org/postgresql/postgresql/42.7.2/postgresql-42.7.2.jar
+* Get clickhouse driver: wget https://repo1.maven.org/maven2/com/clickhouse/clickhouse-jdbc/0.6.0/clickhouse-jdbc-0.6.0.jar
+* Get flink-sql-clickhouse connector: wget https://repo1.maven.org/maven2/name/nkonev/flink/flink-sql-connector-clickhouse/1.17.1-9/flink-sql-connector-clickhouse-1.17.1-9.jar
+
+[//]: # (* Download jdbc driver bundle: https://repo.maven.apache.org/maven2/org/apache/flink/flink-sql-jdbc-driver-bundle/1.19.0/flink-sql-jdbc-driver-bundle-1.19.0.jar)
 
 
 

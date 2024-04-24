@@ -1,8 +1,7 @@
 CREATE TABLE enriched_sales (
     Sales_Id Int32 NOT NULL,
-    CustomerKey String,
-    Customer_FullName String, -- Get this as LastName_FirstName from Customer table
-    -- CurrencyKey String, -- Currency not included because using USD generally
+     Customer_Id INT,
+    Customer_FullName String,
     Discount_Amount Nullable(String),
     DueDate Nullable(String),
     Extended_Amount Nullable(String),
@@ -14,16 +13,19 @@ CREATE TABLE enriched_sales (
     Sales_Amount Nullable(String),
     Sales_Order_Number Nullable(String),
     SalesTerritoryKey Nullable(String),
-    Sales_Territory_Country String, -- Get this from Sales_Territory table
-    Sales_Territory_Region String, -- Get this from Sales_Territory table
+    Sales_Territory_Country String,
+    Sales_Territory_Region String,
     ShipDate Nullable(String),
     Tax_Amt Nullable(String),
     Total_Product_Cost Nullable(String),
     Unit_Price Nullable(String),
     Unit_Price_Discount_Pct Nullable(String),
     Employee_Id Int32 NOT NULL,
-    Employee_Name String  -- Get this from Employee table
+    Employee_Name String
 ) ENGINE = MergeTree()
 ORDER BY Sales_Id
 --PARTITION BY toYYYYMM(Order_Date);
 
+CREATE USER Rroot IDENTIFIED BY 'R1234!';
+
+GRANT ALL ON rembo.* TO 'Rroot'@'%' WITH GRANT OPTION;

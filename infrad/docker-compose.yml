@@ -54,6 +54,20 @@ services:
     environment:
       - JOB_MANAGER_RPC_ADDRESS=jobmanager
 
+  taskmanager2:
+    container_name: flink_tm2
+    image: flink:latest
+    expose:
+      - "6121"
+      - "6122"
+    depends_on:
+      - jobmanager
+    command:
+      - taskmanager
+    links:
+      - "jobmanager:jobmanager"
+    environment:
+      - JOB_MANAGER_RPC_ADDRESS=jobmanager
 
 volumes:
   irmpgdata:

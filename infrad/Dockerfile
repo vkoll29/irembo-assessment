@@ -1,26 +1,14 @@
-# Use a base image with Maven pre-installed
-FROM maven:3.8.4-openjdk-11 AS builder
+# Use Flink base image for version 1.18.1
+FROM apache/flink:1.18.1
 
-# Set the working directory in the container
-WORKDIR /app
+# Set working directory
+WORKDIR /opt/flink
 
-# Download Flink source code
-RUN git clone https://github.com/apache/flink.git .
+# Download postgres-cdc connector
+RUN wget https://repo1.maven.org/maven2/com/ververica/flink-sql-connector-postgres-cdc/3.0.1/flink-sql-connector-postgres-cdc-3.0.1.jar -O ./lib/flink-sql-connector-postgres-cdc-3.0.1.jar
 
-# Build Flink
-RUN mvn clean install -DskipTests
+# Download jdbc connector
+RUN wget https://repo1.maven.org/maven2/org/apache/flink/flink-connector-jdbc/3.1.2-1.18/flink-connector-jdbc-3.1.2-1.18.jar -O ./lib/flink-connector-jdbc-3.1.2-1.18.jar
 
-# Switch to a lighter-weight image for the runtime environment
-FROM openjdk:11-jre-slim
-
-# Set the working directory in the container
-WORKDIR /app
-
-# Copy the compiled Flink JAR from the builder stage
-COPY --from=builder /app/flink-dist/target/flink--bin/flink-/ /app
-
-# Expose Flink ports
-EXPOSE 6123 8081
-
-# Start Flink
-CMD ["bin/start-cluster.sh"]
+# Download postgres jdbc driver
+RUN wget https://repo1.maven.org/maven2/org/postgresql/postgresql/42.7.2/postgresql-42.7.2.jar -O ./lib/postgresql-42.7.2.jar

@@ -35,10 +35,10 @@ def _get_customer_keys():
 
 
 # Populate Customers table
-def populate_customers():
+def populate_customers(num):
     conn = _establish_conn()
     cursor = conn.cursor()
-    for _ in range(50000):
+    for _ in range(num):
         last_name = fake.last_name()[:49]
         address_line1 = fake.address()[:49]
         address_line2 = fake.address()[:49]
@@ -126,12 +126,12 @@ def populate_territory():
         conn.close()
 
 
-def populate_employees():
+def populate_employees(num):
     conn = _establish_conn()
     cursor = conn.cursor()
     fake = Faker()
     try:
-        for _ in range(500):
+        for _ in range(num):
             employee_name = fake.name()
             employee_territory_region = fake.random_element(
                 elements=(
